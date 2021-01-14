@@ -46,7 +46,11 @@ func Request(base, endpoint, method, username, password string, hasBody bool, da
 		log.Fatal(err)
 	}
 
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+
 	req.SetBasicAuth(username, password)
+
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Fatal(err)
@@ -68,7 +72,7 @@ func Delete(base, endpoint, username, password string) (string, error) {
 
 // Get sends a HTTP GET request to the server.
 func Get(base, endpoint, username, password string) (string, error) {
-	return Request(base, endpoint, "Get", username, password, false, nil)
+	return Request(base, endpoint, "GET", username, password, false, nil)
 }
 
 // Post sends a HTTP POST request to the server.
