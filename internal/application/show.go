@@ -3,20 +3,20 @@ package application
 import (
 	"log"
 
-	"github.com/pushbits/cli/cmd/settings"
+	"github.com/pushbits/cli/internal/settings"
 )
 
-type deleteCommand struct {
+type showCommand struct {
 	Arguments struct {
 		ID uint `positional-arg-name:"id" description:"The ID of the application"`
 	} `required:"true" positional-args:"true"`
 }
 
-func (c *deleteCommand) Execute(args []string) error {
+func (c *showCommand) Execute(args []string) error {
 	settings.Runner = c
 	return nil
 }
 
-func (c *deleteCommand) Run(s settings.Settings) {
-	log.Printf("deleteCommand")
+func (c *showCommand) Run(s settings.Settings, password string) {
+	log.Printf("showCommand")
 }

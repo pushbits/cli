@@ -5,20 +5,21 @@ import (
 
 	"github.com/jessevdk/go-flags"
 
-	"github.com/pushbits/cli/cmd/application"
-	"github.com/pushbits/cli/cmd/settings"
-	"github.com/pushbits/cli/cmd/user"
+	"github.com/pushbits/cli/internal/application"
+	"github.com/pushbits/cli/internal/credentials"
+	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/user"
 )
 
-type Commands struct {
+type commands struct {
 	settings.Settings
 	Application application.Command `command:"application" alias:"a" description:"Configure applications"`
 	User        user.Command        `command:"user" alias:"u" description:"Configure users"`
 }
 
 var (
-	commands Commands
-	parser   = flags.NewParser(&commands, flags.Default)
+	cmds   commands
+	parser = flags.NewParser(&cmds, flags.Default)
 )
 
 func main() {
@@ -28,9 +29,11 @@ func main() {
 	}
 
 	s := settings.Settings{
-		URL:      commands.URL,
-		Username: commands.Username,
+		URL:      cmds.URL,
+		Username: cmds.Username,
 	}
 
-	settings.Runner.Run(s)
+	password := credentials.GetPassword()
+
+	settings.Runner.Run(s, password)
 }

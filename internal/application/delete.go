@@ -1,14 +1,14 @@
-package user
+package application
 
 import (
 	"log"
 
-	"github.com/pushbits/cli/cmd/settings"
+	"github.com/pushbits/cli/internal/settings"
 )
 
 type deleteCommand struct {
 	Arguments struct {
-		ID uint `positional-arg-name:"id" description:"The ID of the user"`
+		ID uint `positional-arg-name:"id" description:"The ID of the application"`
 	} `required:"true" positional-args:"true"`
 }
 
@@ -17,6 +17,6 @@ func (c *deleteCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *deleteCommand) Run(s settings.Settings) {
+func (c *deleteCommand) Run(s settings.Settings, password string) {
 	log.Printf("deleteCommand")
 }

@@ -1,5 +1,6 @@
 package application
 
+// Command contains all subcommands provided by this package.
 type Command struct {
 	Create createCommand `command:"create" alias:"c" description:"Create a new application for a user"`
 	Delete deleteCommand `command:"delete" alias:"d" description:"Delete an existing application for a user"`

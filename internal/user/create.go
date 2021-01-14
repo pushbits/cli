@@ -1,9 +1,7 @@
 package user
 
 import (
-	"log"
-
-	"github.com/pushbits/cli/cmd/settings"
+	"github.com/pushbits/cli/internal/settings"
 )
 
 type createCommand struct {
@@ -18,6 +16,5 @@ func (c *createCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *createCommand) Run(s settings.Settings) {
-	log.Printf("createCommand")
+func (c *createCommand) Run(s settings.Settings, password string) {
 }
