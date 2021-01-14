@@ -86,6 +86,8 @@ This means, to create an application with the name `Demo` for the user `myuserna
 pbcli application create Demo --url https://pushbits.example.com --username myusername
 ```
 
+You will then be asked for your password interactively.
+
 Now you should have a basic idea of how this CLI tool works.
 Happy for you to reach out if there are any questions.
 
