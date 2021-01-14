@@ -11,6 +11,16 @@ This is similar to what [PushBullet](https://www.pushbullet.com/), [Pushover](ht
 This command line tool enables users to create and modify applications.
 Further, it can be used by administrators to administrate to add and remove users.
 
+## Installation
+
+The following command will download, build, and install the tool.
+
+```bash
+go get -u github.com/pushbits/cli/cmd/pbcli
+```
+
+Note that this requires [a working Go 1.12+ installation](https://golang.org/doc/install).
+
 ## Development
 
 The source code is located on [GitHub](https://github.com/pushbits/cli).
