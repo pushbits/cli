@@ -1,6 +1,8 @@
 .PHONY: build
 build:
-	go build -ldflags="-w -s" -o pbcli ./cmd
+	rm -rf ./out
+	mkdir -p ./out
+	go build -ldflags="-w -s" -o ./out/pbcli ./cmd/pbcli
 
 .PHONY: test
 test:
