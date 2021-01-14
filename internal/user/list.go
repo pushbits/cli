@@ -1,9 +1,15 @@
 package user
 
 import (
+	"fmt"
 	"log"
 
+	"github.com/pushbits/cli/internal/api"
 	"github.com/pushbits/cli/internal/settings"
+)
+
+const (
+	listEndpoint = "/user"
 )
 
 type listCommand struct {
@@ -15,5 +21,10 @@ func (c *listCommand) Execute(args []string) error {
 }
 
 func (c *listCommand) Run(s settings.Settings, password string) {
-	log.Printf("listCommand")
+	resp, err := api.Get(s.URL, listEndpoint, s.Username, password)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(resp)
 }

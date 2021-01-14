@@ -1,9 +1,15 @@
 package application
 
 import (
+	"fmt"
 	"log"
 
+	"github.com/pushbits/cli/internal/api"
 	"github.com/pushbits/cli/internal/settings"
+)
+
+const (
+	createEndpoint = "/application"
 )
 
 type createCommand struct {
@@ -18,5 +24,14 @@ func (c *createCommand) Execute(args []string) error {
 }
 
 func (c *createCommand) Run(s settings.Settings, password string) {
-	log.Printf("createCommand")
+	data := map[string]interface{}{
+		"name": c.Arguments.Name,
+	}
+
+	resp, err := api.Post(s.URL, createEndpoint, s.Username, password, data)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(resp)
 }

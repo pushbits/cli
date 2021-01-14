@@ -1,9 +1,15 @@
 package application
 
 import (
+	"fmt"
 	"log"
 
+	"github.com/pushbits/cli/internal/api"
 	"github.com/pushbits/cli/internal/settings"
+)
+
+const (
+	deleteEndpoint = "/application/%d"
 )
 
 type deleteCommand struct {
@@ -18,5 +24,12 @@ func (c *deleteCommand) Execute(args []string) error {
 }
 
 func (c *deleteCommand) Run(s settings.Settings, password string) {
-	log.Printf("deleteCommand")
+	populatedEndpoint := fmt.Sprintf(deleteEndpoint, c.Arguments.ID)
+
+	resp, err := api.Delete(s.URL, populatedEndpoint, s.Username, password)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(resp)
 }
