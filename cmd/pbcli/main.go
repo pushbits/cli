@@ -6,8 +6,8 @@ import (
 	"github.com/jessevdk/go-flags"
 
 	"github.com/pushbits/cli/internal/application"
-	"github.com/pushbits/cli/internal/credentials"
 	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/ui"
 	"github.com/pushbits/cli/internal/user"
 )
 
@@ -33,7 +33,7 @@ func main() {
 		Username: cmds.Username,
 	}
 
-	password := credentials.GetPassword()
+	password := ui.GetPassword()
 
 	settings.Runner.Run(s, password)
 }

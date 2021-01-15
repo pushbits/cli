@@ -1,11 +1,11 @@
 package application
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/pushbits/cli/internal/api"
 	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/ui"
 )
 
 const (
@@ -33,5 +33,5 @@ func (c *createCommand) Run(s settings.Settings, password string) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(resp)
+	ui.PrintJSON(resp)
 }

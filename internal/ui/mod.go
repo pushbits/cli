@@ -1,6 +1,7 @@
-package credentials
+package ui
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"syscall"
@@ -25,4 +26,15 @@ func GetPassword() string {
 	}
 
 	return password
+}
+
+// PrintJSON pretty-prints JSON to the terminal.
+func PrintJSON(obj interface{}) {
+	pretty, err := json.MarshalIndent(obj, "", "\t")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(string(pretty))
 }

@@ -25,7 +25,7 @@ func buildURL(baseStr string, endpoint string) *url.URL {
 }
 
 // Request sends a HTTP request to the server.
-func Request(base, endpoint, method, username, password string, hasBody bool, data interface{}) (string, error) {
+func Request(base, endpoint, method, username, password string, hasBody bool, data interface{}) (interface{}, error) {
 	client := &http.Client{}
 	url := buildURL(base, endpoint)
 
@@ -56,26 +56,37 @@ func Request(base, endpoint, method, username, password string, hasBody bool, da
 		log.Fatal(err)
 	}
 
+	if resp.StatusCode != http.StatusOK {
+		log.Fatalf("Request failed with HTTP %s.", resp.Status)
+	}
+
 	defer resp.Body.Close()
 	bodyText, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return string(bodyText), nil
+	var obj interface{}
+
+	err = json.Unmarshal(bodyText, &obj)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return obj, nil
 }
 
 // Delete sends a HTTP DELETE request to the server.
-func Delete(base, endpoint, username, password string) (string, error) {
+func Delete(base, endpoint, username, password string) (interface{}, error) {
 	return Request(base, endpoint, "DELETE", username, password, false, nil)
 }
 
 // Get sends a HTTP GET request to the server.
-func Get(base, endpoint, username, password string) (string, error) {
+func Get(base, endpoint, username, password string) (interface{}, error) {
 	return Request(base, endpoint, "GET", username, password, false, nil)
 }
 
 // Post sends a HTTP POST request to the server.
-func Post(base, endpoint, username, password string, data interface{}) (string, error) {
+func Post(base, endpoint, username, password string, data interface{}) (interface{}, error) {
 	return Request(base, endpoint, "POST", username, password, true, data)
 }
