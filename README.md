@@ -2,6 +2,9 @@
 
 # PushBits CLI
 
+| :exclamation:  This software is currently in alpha phase.   |
+|-------------------------------------------------------------|
+
 ## About
 
 PushBits is a relay server for push notifications.
@@ -9,7 +12,7 @@ It enables your services to send notifications via a simple web API, and deliver
 This is similar to what [PushBullet](https://www.pushbullet.com/), [Pushover](https://pushover.net/), and [Gotify](https://gotify.net/) offer, but a lot less complex.
 
 This command line tool enables users to create and modify applications.
-Further, it can be used by administrators to administrate to add and remove users.
+Further, it can be used by administrators to add and remove users.
 
 ## Installation
 
