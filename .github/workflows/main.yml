@@ -1,0 +1,16 @@
+name: Main
+on: push
+jobs:
+  test_publish:
+    name: Test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: make setup
+      - name: Run tests
+        run: |
+            export PATH="$PATH:$(go env GOPATH)/bin" # Currently the path needs to be set manually.
+            make test
+      - name: Build
+        run: make build
