@@ -10,8 +10,8 @@ import (
 )
 
 // GetPassword reads a password from the terminal.
-func GetPassword() string {
-	fmt.Print("Password: ")
+func GetPassword(prompt string) string {
+	fmt.Print(prompt)
 	passwordBytes, err := terminal.ReadPassword(int(syscall.Stdin))
 	fmt.Print("\n")
 

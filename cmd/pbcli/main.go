@@ -33,7 +33,7 @@ func main() {
 		Username: cmds.Username,
 	}
 
-	password := ui.GetPassword()
+	password := ui.GetPassword("Current password of user " + s.Username + ": ")
 
 	settings.Runner.Run(s, password)
 }
