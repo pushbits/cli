@@ -1,3 +1,4 @@
+[![Build status](https://img.shields.io/github/workflow/status/pushbits/cli/Main)](https://github.com/pushbits/cli/actions)
 ![License](https://img.shields.io/github/license/pushbits/cli)
 
 # PushBits CLI
@@ -26,11 +27,11 @@ Note that this requires [a working Go 1.12+ installation](https://golang.org/doc
 
 ## Usage
 
-If you are a normal user of the PushBits server, you will most likely just want to manage your applications.
+If you are a normal user of PushBits, you will most likely just want to manage your applications.
 As an admin, you are possibly trying to manage your users.
 This tool provides help for both use cases.
 
-In particular, the tool groups the different actions in two separate commands, `application` and `user`
+In particular, the tool supports two separate subcommands, `application` and `user`
 As the names suggest, the former lets you configure applications, while the latter deals with users.
 
 To use this tool, you need to know the URL of your PushBits instance and the credentials (username and password) of your user.
@@ -83,10 +84,10 @@ Help Options:
 
 So we need to provide a name for the application.
 Of course, we also need to provide the URL of the PushBits instance as well as the username.
-This means, to create an application with the name `Demo` for the user `myusername`, we need to run the following command.
+This means, to create an application with the name `MyApplication` for the user `MyUsername`, we need to run the following command.
 
 ```bash
-pbcli application create Demo --url https://pushbits.example.com --username myusername
+pbcli application create MyApplication --url https://pushbits.example.com --username MyUsername
 ```
 
 You will then be asked for your password interactively.
