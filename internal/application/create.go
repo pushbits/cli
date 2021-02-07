@@ -16,6 +16,7 @@ type createCommand struct {
 	Arguments struct {
 		Name string `positional-arg-name:"name" description:"The name of the application"`
 	} `required:"true" positional-args:"true"`
+	StrictCompatibility bool `long:"compat" description:"Enforce strict compatibility with Gotify"`
 }
 
 func (c *createCommand) Execute(args []string) error {
@@ -25,7 +26,8 @@ func (c *createCommand) Execute(args []string) error {
 
 func (c *createCommand) Run(s settings.Settings, password string) {
 	data := map[string]interface{}{
-		"name": c.Arguments.Name,
+		"name":                 c.Arguments.Name,
+		"strict_compatibility": c.StrictCompatibility,
 	}
 
 	resp, err := api.Post(s.URL, createEndpoint, s.Username, password, data)

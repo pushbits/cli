@@ -90,3 +90,8 @@ func Get(base, endpoint, username, password string) (interface{}, error) {
 func Post(base, endpoint, username, password string, data interface{}) (interface{}, error) {
 	return Request(base, endpoint, "POST", username, password, true, data)
 }
+
+// Put sends a HTTP PUT request to the server.
+func Put(base, endpoint, username, password string, data interface{}) (interface{}, error) {
+	return Request(base, endpoint, "PUT", username, password, true, data)
+}
