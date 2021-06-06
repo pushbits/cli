@@ -6,13 +6,13 @@ import (
 	"log"
 	"syscall"
 
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 // GetPassword reads a password from the terminal.
 func GetPassword(prompt string) string {
 	fmt.Print(prompt)
-	passwordBytes, err := terminal.ReadPassword(int(syscall.Stdin))
+	passwordBytes, err := term.ReadPassword(int(syscall.Stdin))
 	fmt.Print("\n")
 
 	if err != nil {
@@ -28,7 +28,7 @@ func GetPassword(prompt string) string {
 	return password
 }
 
-// PrintJSON pretty-prints JSON to the terminal.
+// PrintJSON pretty-prints JSON to the term.
 func PrintJSON(obj interface{}) {
 	pretty, err := json.MarshalIndent(obj, "", "\t")
 

@@ -1,6 +1,5 @@
 .PHONY: build
 build:
-	rm -rf ./out
 	mkdir -p ./out
 	go build -ldflags="-w -s" -o ./out/pbcli ./cmd/pbcli
 
@@ -12,13 +11,10 @@ test:
 	fi
 	go vet ./...
 	gocyclo -over 10 $(shell find . -iname '*.go' -type f)
+	staticcheck ./...
 	go test -v -cover ./...
-	stdout=$$(golint ./... 2>&1); \
-	if [ "$$stdout" ]; then \
-		exit 1; \
-	fi
 
 .PHONY: setup
 setup:
 	go get -u github.com/fzipp/gocyclo/cmd/gocyclo
-	go get -u golang.org/x/lint/golint
+	go get -u honnef.co/go/tools/cmd/staticcheck
