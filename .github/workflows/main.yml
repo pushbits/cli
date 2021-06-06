@@ -4,7 +4,7 @@ permissions:
   contents: write
 jobs:
   test_publish:
-    name: Test and build
+    name: Test and publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
