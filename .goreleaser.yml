@@ -1,0 +1,31 @@
+builds:
+  - id: pbcli
+    main: ./cmd/pbcli
+    goos:
+      - linux
+      - windows
+      - freebsd
+      - openbsd
+      - darwin
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    ignore:
+      - goos: freebsd
+        goarch: arm64
+
+checksum:
+  algorithm: sha256
+
+archives:
+  - id: pbcli
+    builds:
+      - pbcli
+    format: tar.gz
+    replacements:
+        darwin: macOS
+    format_overrides:
+        - goos: windows
+          format: zip

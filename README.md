@@ -17,13 +17,11 @@ Further, it can be used by administrators to add and remove users.
 
 ## Installation
 
-The following command will download, build, and install the tool.
-
+It it easiest to download the binary from the [latest release](https://github.com/pushbits/cli/releases).
+Alternatively, build it yourself:
 ```bash
-go get -u github.com/pushbits/cli/cmd/pbcli
+go get -u github.com/pushbits/cli/cmd/...
 ```
-
-Note that this requires [a working Go 1.12+ installation](https://golang.org/doc/install).
 
 ## Usage
 
