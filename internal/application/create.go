@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	createEndpoint = "/application"
+	createEndpoint = "application"
 )
 
 type createCommand struct {

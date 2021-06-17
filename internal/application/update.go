@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	updateEndpoint = "/application/%d"
+	updateEndpoint = "application/%d"
 )
 
 type updateCommand struct {

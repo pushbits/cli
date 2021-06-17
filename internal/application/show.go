@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	showEndpoint = "/application/%d"
+	showEndpoint = "application/%d"
 )
 
 type showCommand struct {

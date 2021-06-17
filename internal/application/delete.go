@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	deleteEndpoint = "/application/%d"
+	deleteEndpoint = "application/%d"
 )
 
 type deleteCommand struct {

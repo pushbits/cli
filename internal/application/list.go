@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	listEndpoint = "/application"
+	listEndpoint = "application"
 )
 
 type listCommand struct {
