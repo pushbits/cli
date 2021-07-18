@@ -16,5 +16,5 @@ test:
 
 .PHONY: setup
 setup:
-	go get -u github.com/fzipp/gocyclo/cmd/gocyclo
-	go get -u honnef.co/go/tools/cmd/staticcheck
+	go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
+	go install honnef.co/go/tools/cmd/staticcheck@latest
