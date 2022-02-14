@@ -20,7 +20,7 @@ Further, it can be used by administrators to add and remove users.
 It it easiest to download the binary from the [latest release](https://github.com/pushbits/cli/releases).
 Alternatively, build it yourself:
 ```bash
-go get -u github.com/pushbits/cli/cmd/...
+go install github.com/pushbits/cli/cmd/...@latest
 ```
 
 ## Usage
