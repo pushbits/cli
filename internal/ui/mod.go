@@ -31,7 +31,6 @@ func GetPassword(prompt string) string {
 // PrintJSON pretty-prints JSON to the term.
 func PrintJSON(obj interface{}) {
 	pretty, err := json.MarshalIndent(obj, "", "\t")
-
 	if err != nil {
 		log.Fatal(err)
 	}
