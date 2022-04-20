@@ -24,7 +24,7 @@ func (c *showCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *showCommand) Run(s settings.Settings, password string) {
+func (c *showCommand) Run(s *settings.Settings, password string) {
 	populatedEndpoint := fmt.Sprintf(showEndpoint, c.Arguments.ID)
 
 	resp, err := api.Get(s.URL, populatedEndpoint, s.Username, password)

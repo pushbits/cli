@@ -24,7 +24,7 @@ func (c *createCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *createCommand) Run(s settings.Settings, password string) {
+func (c *createCommand) Run(s *settings.Settings, password string) {
 	newPassword := ui.GetPassword("New password of user " + c.Arguments.Name + ": ")
 
 	data := map[string]interface{}{

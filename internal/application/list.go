@@ -20,7 +20,7 @@ func (c *listCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *listCommand) Run(s settings.Settings, password string) {
+func (c *listCommand) Run(s *settings.Settings, password string) {
 	resp, err := api.Get(s.URL, listEndpoint, s.Username, password)
 	if err != nil {
 		log.Fatal(err)

@@ -27,7 +27,7 @@ func (c *updateCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *updateCommand) Run(s settings.Settings, password string) {
+func (c *updateCommand) Run(s *settings.Settings, password string) {
 	if !c.RefreshToken && c.StrictCompatibility {
 		log.Fatal("Can only enforce compatibility when refreshing the token of the application")
 	}

@@ -24,7 +24,7 @@ func (c *createCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *createCommand) Run(s settings.Settings, password string) {
+func (c *createCommand) Run(s *settings.Settings, password string) {
 	data := map[string]interface{}{
 		"name":                 c.Arguments.Name,
 		"strict_compatibility": c.StrictCompatibility,

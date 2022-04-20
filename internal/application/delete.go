@@ -24,7 +24,7 @@ func (c *deleteCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *deleteCommand) Run(s settings.Settings, password string) {
+func (c *deleteCommand) Run(s *settings.Settings, password string) {
 	populatedEndpoint := fmt.Sprintf(deleteEndpoint, c.Arguments.ID)
 
 	resp, err := api.Delete(s.URL, populatedEndpoint, s.Username, password)

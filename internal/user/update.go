@@ -26,7 +26,7 @@ func (c *updateCommand) Execute(args []string) error {
 	return nil
 }
 
-func (c *updateCommand) Run(s settings.Settings, password string) {
+func (c *updateCommand) Run(s *settings.Settings, password string) {
 	data := map[string]interface{}{}
 
 	if c.NewName != nil {

@@ -8,7 +8,7 @@ type Settings struct {
 
 // Runnable defines an interface for subcommands that take the global settings and a password.
 type Runnable interface {
-	Run(Settings, string)
+	Run(*Settings, string)
 }
 
 // Runner is the subcommand to run after all arguments were parsed.
