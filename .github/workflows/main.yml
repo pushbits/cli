@@ -1,7 +1,10 @@
 name: Main
+
 on: push
+
 permissions:
   contents: write
+
 jobs:
   test_publish:
     name: Test and publish
@@ -10,17 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Needed to describe git ref during build.
+
       - name: Export GOBIN
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.17
+
       - name: Install dependencies
         run: make setup
+
       - name: Run tests
         run: make test
+
       - name: Build
         run: make build
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         if: startsWith(github.ref, 'refs/tags/v') # Only release for tagged commits.
