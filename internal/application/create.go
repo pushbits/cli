@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/pushbits/cli/internal/api"
-	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/options"
 	"github.com/pushbits/cli/internal/ui"
 )
 
@@ -13,27 +13,25 @@ const (
 )
 
 type createCommand struct {
-	Arguments struct {
-		Name string `positional-arg-name:"name" description:"The name of the application"`
-	} `required:"true" positional-args:"true"`
-	StrictCompatibility bool `long:"compat" description:"Enforce strict compatibility with Gotify"`
+	options.AuthOptions
+	Name                string `arg:"name" help:"The name of the application"`
+	StrictCompatibility bool   `long:"compat" help:"Enforce strict compatibility with Gotify"`
 }
 
-func (c *createCommand) Execute(args []string) error {
-	settings.Runner = c
-	return nil
-}
+func (c *createCommand) Run(s *options.Options) error {
+	password := ui.GetCurrentPassword(c.Username)
 
-func (c *createCommand) Run(s *settings.Settings, password string) {
 	data := map[string]interface{}{
-		"name":                 c.Arguments.Name,
+		"name":                 c.Name,
 		"strict_compatibility": c.StrictCompatibility,
 	}
 
-	resp, err := api.Post(s.URL, createEndpoint, s.Proxy, s.Username, password, data)
+	resp, err := api.Post(c.URL, createEndpoint, c.Proxy, c.Username, password, data)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	ui.PrintJSON(resp)
+
+	return nil
 }

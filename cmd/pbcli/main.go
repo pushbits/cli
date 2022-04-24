@@ -1,42 +1,23 @@
 package main
 
 import (
-	"os"
-
-	"github.com/jessevdk/go-flags"
+	"github.com/alecthomas/kong"
 
 	"github.com/pushbits/cli/internal/application"
 	"github.com/pushbits/cli/internal/commands"
-	"github.com/pushbits/cli/internal/settings"
-	"github.com/pushbits/cli/internal/ui"
+	"github.com/pushbits/cli/internal/options"
 	"github.com/pushbits/cli/internal/user"
 )
 
-type options struct {
-	settings.Settings
-	Application application.Command     `command:"application" alias:"a" description:"Configure applications"`
-	User        user.Command            `command:"user" alias:"u" description:"Configure users"`
-	Version     commands.VersionCommand `command:"version" alias:"v" description:"Print the program version"`
+var cmd struct {
+	options.Options
+	Application application.Command     `cmd:"application" aliases:"a" help:"Configure applications"`
+	User        user.Command            `cmd:"user" aliases:"u" help:"Configure users"`
+	Version     commands.VersionCommand `cmd:"version" aliases:"v" help:"Print the program version"`
 }
 
-var (
-	cmds   options
-	parser = flags.NewParser(&cmds, flags.Default)
-)
-
 func main() {
-	_, err := parser.Parse()
-	if err != nil {
-		os.Exit(1)
-	}
-
-	s := &settings.Settings{
-		URL:      cmds.URL,
-		Username: cmds.Username,
-		Proxy:    cmds.Proxy,
-	}
-
-	password := ui.GetPassword("Current password of user " + s.Username + ": ")
-
-	settings.Runner.Run(s, password)
+	ctx := kong.Parse(&cmd)
+	err := ctx.Run(&cmd.Options)
+	ctx.FatalIfErrorf(err)
 }

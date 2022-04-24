@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/pushbits/cli/internal/api"
-	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/options"
 	"github.com/pushbits/cli/internal/ui"
 )
 
@@ -13,30 +13,28 @@ const (
 )
 
 type createCommand struct {
-	Arguments struct {
-		Name     string `positional-arg-name:"name" description:"The name of the user"`
-		MatrixID string `positional-arg-name:"matrixid" description:"The Matrix ID of the user"`
-	} `required:"true" positional-args:"true"`
+	options.AuthOptions
+	Name     string `arg:"" help:"The name of the user"`
+	MatrixID string `arg:"" help:"The Matrix ID of the user"`
 }
 
-func (c *createCommand) Execute(args []string) error {
-	settings.Runner = c
-	return nil
-}
+func (c *createCommand) Run(s *options.Options) error {
+	password := ui.GetCurrentPassword(c.Username)
 
-func (c *createCommand) Run(s *settings.Settings, password string) {
-	newPassword := ui.GetPassword("New password of user " + c.Arguments.Name + ": ")
+	newPassword := ui.GetNewPassword(c.Name)
 
 	data := map[string]interface{}{
-		"name":      c.Arguments.Name,
+		"name":      c.Name,
 		"password":  newPassword,
-		"matrix_id": c.Arguments.MatrixID,
+		"matrix_id": c.MatrixID,
 	}
 
-	resp, err := api.Post(s.URL, createEndpoint, s.Proxy, s.Username, password, data)
+	resp, err := api.Post(c.URL, createEndpoint, c.Proxy, c.Username, password, data)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	ui.PrintJSON(resp)
+
+	return nil
 }

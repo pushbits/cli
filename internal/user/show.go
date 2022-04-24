@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/pushbits/cli/internal/api"
-	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/options"
 	"github.com/pushbits/cli/internal/ui"
 )
 
@@ -14,23 +14,21 @@ const (
 )
 
 type showCommand struct {
-	Arguments struct {
-		ID uint `positional-arg-name:"id" description:"The ID of the user"`
-	} `required:"true" positional-args:"true"`
+	options.AuthOptions
+	ID uint `arg:"" help:"The ID of the user"`
 }
 
-func (c *showCommand) Execute(args []string) error {
-	settings.Runner = c
-	return nil
-}
+func (c *showCommand) Run(s *options.Options) error {
+	password := ui.GetCurrentPassword(c.Username)
 
-func (c *showCommand) Run(s *settings.Settings, password string) {
-	populatedEndpoint := fmt.Sprintf(showEndpoint, c.Arguments.ID)
+	populatedEndpoint := fmt.Sprintf(showEndpoint, c.ID)
 
-	resp, err := api.Get(s.URL, populatedEndpoint, s.Proxy, s.Username, password)
+	resp, err := api.Get(c.URL, populatedEndpoint, c.Proxy, c.Username, password)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	ui.PrintJSON(resp)
+
+	return nil
 }

@@ -9,9 +9,9 @@ import (
 	"golang.org/x/term"
 )
 
-// GetPassword reads a password from the terminal.
-func GetPassword(prompt string) string {
+func getPassword(prompt string) string {
 	fmt.Print(prompt)
+
 	passwordBytes, err := term.ReadPassword(int(syscall.Stdin))
 	fmt.Print("\n")
 
@@ -36,4 +36,14 @@ func PrintJSON(obj interface{}) {
 	}
 
 	fmt.Println(string(pretty))
+}
+
+// GetCurrentPassword reads the current password for `username` from the terminal.
+func GetCurrentPassword(username string) string {
+	return getPassword("Current password of user " + username + ": ")
+}
+
+// GetNewPassword reads the new password for `username` from the terminal.
+func GetNewPassword(username string) string {
+	return getPassword("New password of user " + username + ": ")
 }

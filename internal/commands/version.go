@@ -4,16 +4,13 @@ import (
 	"fmt"
 
 	"github.com/pushbits/cli/internal/buildconfig"
-	"github.com/pushbits/cli/internal/settings"
+	"github.com/pushbits/cli/internal/options"
 )
 
 type VersionCommand struct{}
 
-func (c *VersionCommand) Execute(args []string) error {
-	settings.Runner = c
-	return nil
-}
-
-func (c *VersionCommand) Run(s *settings.Settings, password string) {
+func (c *VersionCommand) Run(s *options.Options) error {
 	fmt.Printf("pbcli %s\n", buildconfig.Version)
+
+	return nil
 }
