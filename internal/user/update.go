@@ -2,7 +2,8 @@ package user
 
 import (
 	"fmt"
-	"log"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/pushbits/cli/internal/api"
 	"github.com/pushbits/cli/internal/options"

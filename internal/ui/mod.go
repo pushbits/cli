@@ -3,8 +3,9 @@ package ui
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"syscall"
+
+	log "github.com/sirupsen/logrus"
 
 	"golang.org/x/term"
 )

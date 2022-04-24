@@ -1,7 +1,9 @@
 package options
 
 // Options represents the global options.
-type Options struct{}
+type Options struct {
+	Verbose bool `short:"v" help:"Show debugging information"`
+}
 
 // AuthOptions represents the options for authentication against a server.
 type AuthOptions struct {

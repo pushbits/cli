@@ -4,10 +4,11 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func buildURL(baseStr string, endpoint string) *url.URL {
