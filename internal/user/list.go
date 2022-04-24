@@ -20,7 +20,7 @@ func (c *listCommand) Execute(args []string) error {
 }
 
 func (c *listCommand) Run(s *settings.Settings, password string) {
-	resp, err := api.Get(s.URL, listEndpoint, s.Username, password)
+	resp, err := api.Get(s.URL, listEndpoint, s.Proxy, s.Username, password)
 	if err != nil {
 		log.Fatal(err)
 	}

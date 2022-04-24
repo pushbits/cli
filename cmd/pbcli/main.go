@@ -33,6 +33,7 @@ func main() {
 	s := &settings.Settings{
 		URL:      cmds.URL,
 		Username: cmds.Username,
+		Proxy:    cmds.Proxy,
 	}
 
 	password := ui.GetPassword("Current password of user " + s.Username + ": ")

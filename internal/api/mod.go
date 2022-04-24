@@ -25,8 +25,26 @@ func buildURL(baseStr string, endpoint string) *url.URL {
 }
 
 // Request sends a HTTP request to the server.
-func Request(base, endpoint, method, username, password string, hasBody bool, data interface{}) (interface{}, error) {
-	client := &http.Client{}
+func Request(base, endpoint, method, proxy, username, password string, hasBody bool, data interface{}) (interface{}, error) {
+	transport := http.DefaultTransport
+
+	if len(proxy) > 0 {
+		log.Printf("Using proxy '%s'", proxy)
+
+		proxyURL, err := url.Parse(proxy)
+		if err != nil {
+			return nil, err
+		}
+
+		transport = &http.Transport{
+			Proxy: http.ProxyURL(proxyURL),
+		}
+	}
+
+	client := &http.Client{
+		Transport: transport,
+	}
+
 	url := buildURL(base, endpoint)
 
 	var reqBodyReader io.Reader
@@ -77,21 +95,21 @@ func Request(base, endpoint, method, username, password string, hasBody bool, da
 }
 
 // Delete sends a HTTP DELETE request to the server.
-func Delete(base, endpoint, username, password string) (interface{}, error) {
-	return Request(base, endpoint, "DELETE", username, password, false, nil)
+func Delete(base, endpoint, proxy, username, password string) (interface{}, error) {
+	return Request(base, endpoint, "DELETE", proxy, username, password, false, nil)
 }
 
 // Get sends a HTTP GET request to the server.
-func Get(base, endpoint, username, password string) (interface{}, error) {
-	return Request(base, endpoint, "GET", username, password, false, nil)
+func Get(base, endpoint, proxy, username, password string) (interface{}, error) {
+	return Request(base, endpoint, "GET", proxy, username, password, false, nil)
 }
 
 // Post sends a HTTP POST request to the server.
-func Post(base, endpoint, username, password string, data interface{}) (interface{}, error) {
-	return Request(base, endpoint, "POST", username, password, true, data)
+func Post(base, endpoint, proxy, username, password string, data interface{}) (interface{}, error) {
+	return Request(base, endpoint, "POST", proxy, username, password, true, data)
 }
 
 // Put sends a HTTP PUT request to the server.
-func Put(base, endpoint, username, password string, data interface{}) (interface{}, error) {
-	return Request(base, endpoint, "PUT", username, password, true, data)
+func Put(base, endpoint, proxy, username, password string, data interface{}) (interface{}, error) {
+	return Request(base, endpoint, "PUT", proxy, username, password, true, data)
 }

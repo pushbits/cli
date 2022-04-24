@@ -27,7 +27,7 @@ func (c *showCommand) Execute(args []string) error {
 func (c *showCommand) Run(s *settings.Settings, password string) {
 	populatedEndpoint := fmt.Sprintf(showEndpoint, c.Arguments.ID)
 
-	resp, err := api.Get(s.URL, populatedEndpoint, s.Username, password)
+	resp, err := api.Get(s.URL, populatedEndpoint, s.Proxy, s.Username, password)
 	if err != nil {
 		log.Fatal(err)
 	}

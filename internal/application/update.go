@@ -43,7 +43,7 @@ func (c *updateCommand) Run(s *settings.Settings, password string) {
 
 	populatedEndpoint := fmt.Sprintf(updateEndpoint, c.Arguments.ID)
 
-	resp, err := api.Put(s.URL, populatedEndpoint, s.Username, password, data)
+	resp, err := api.Put(s.URL, populatedEndpoint, s.Proxy, s.Username, password, data)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -33,7 +33,7 @@ func (c *createCommand) Run(s *settings.Settings, password string) {
 		"matrix_id": c.Arguments.MatrixID,
 	}
 
-	resp, err := api.Post(s.URL, createEndpoint, s.Username, password, data)
+	resp, err := api.Post(s.URL, createEndpoint, s.Proxy, s.Username, password, data)
 	if err != nil {
 		log.Fatal(err)
 	}
