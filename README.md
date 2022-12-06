@@ -40,9 +40,9 @@ If you forget how to use the tool, always remember to check out the help using t
 Let's do this for the `application` command.
 
 ```
-$ pbcli application -h
+$ cli application -h
 Usage:
-  pbcli [OPTIONS] application <command>
+  cli [OPTIONS] application <command>
 
 Application Options:
       --url=      The URL where the server listens for requests
@@ -65,9 +65,9 @@ Let's try creating a new application!
 As a first step, check out the help for this subcommand.
 
 ```
-$ pbcli application create -h
+$ cli application create -h
 Usage:
-  pbcli [OPTIONS] application create name
+  cli [OPTIONS] application create name
 
 Application Options:
       --url=      The URL where the server listens for requests
@@ -85,7 +85,7 @@ Of course, we also need to provide the URL of the PushBits instance as well as t
 This means, to create an application with the name `MyApplication` for the user `MyUsername`, we need to run the following command.
 
 ```bash
-pbcli application create MyApplication --url https://pushbits.example.com --username MyUsername
+cli application create MyApplication --url https://pushbits.example.com --username MyUsername
 ```
 
 You will then be asked for your password interactively.
