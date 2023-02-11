@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
@@ -80,7 +79,7 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 	}
 
 	defer resp.Body.Close()
-	bodyText, err := ioutil.ReadAll(resp.Body)
+	bodyText, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
