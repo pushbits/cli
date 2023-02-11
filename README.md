@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/github/workflow/status/pushbits/cli/Main)](https://github.com/pushbits/cli/actions)
+[![Build status](https://img.shields.io/github/actions/workflow/status/pushbits/cli/main.yml?branch=main)](https://github.com/pushbits/cli/actions)
 ![License](https://img.shields.io/github/license/pushbits/cli)
 
 # PushBits CLI
