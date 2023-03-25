@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"strings"
 
+	"github.com/pushbits/cli/internal/handling"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -73,12 +74,12 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer handling.Close(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
 		log.Fatalf("Request failed with HTTP %s.", resp.Status)
 	}
 
-	defer resp.Body.Close()
 	bodyText, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
