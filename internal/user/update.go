@@ -21,7 +21,7 @@ type updateCommand struct {
 	NewMatrixID string `long:"new-matrixid" help:"The new Matrix ID of the user"`
 }
 
-func (c *updateCommand) Run(s *options.Options) error {
+func (c *updateCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	data := map[string]interface{}{}

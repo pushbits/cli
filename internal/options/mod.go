@@ -1,6 +1,7 @@
+// Package options defines the global options of this tool.
 package options
 
-// Options represents the global options.
+// Options represents the global options of this tool.
 type Options struct {
 	Verbose bool `short:"v" help:"Show debugging information"`
 }

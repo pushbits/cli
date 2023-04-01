@@ -16,7 +16,7 @@ type listCommand struct {
 	options.AuthOptions
 }
 
-func (c *listCommand) Run(s *options.Options) error {
+func (c *listCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	resp, err := api.Get(c.URL, listEndpoint, c.Proxy, c.Username, password)

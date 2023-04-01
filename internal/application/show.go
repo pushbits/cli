@@ -19,7 +19,7 @@ type showCommand struct {
 	ID uint `arg:"" help:"The ID of the application"`
 }
 
-func (c *showCommand) Run(s *options.Options) error {
+func (c *showCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	populatedEndpoint := fmt.Sprintf(showEndpoint, c.ID)

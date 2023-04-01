@@ -22,7 +22,7 @@ type updateCommand struct {
 	StrictCompatibility bool   `long:"compat" help:"Enforce strict compatibility with Gotify"`
 }
 
-func (c *updateCommand) Run(s *options.Options) error {
+func (c *updateCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	if !c.RefreshToken && c.StrictCompatibility {

@@ -19,7 +19,7 @@ type deleteCommand struct {
 	ID uint `arg:"" help:"The ID of the user"`
 }
 
-func (c *deleteCommand) Run(s *options.Options) error {
+func (c *deleteCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	populatedEndpoint := fmt.Sprintf(deleteEndpoint, c.ID)

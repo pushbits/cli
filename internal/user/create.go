@@ -18,7 +18,7 @@ type createCommand struct {
 	MatrixID string `arg:"" help:"The Matrix ID of the user"`
 }
 
-func (c *createCommand) Run(s *options.Options) error {
+func (c *createCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	newPassword := ui.GetNewPassword(c.Name)

@@ -1,3 +1,4 @@
+// Package user provides commands related to managing users.
 package user
 
 // Command contains all subcommands provided by this package.

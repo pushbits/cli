@@ -1,3 +1,4 @@
+// Package commands contains functions that are exposed as dedicated commands of the tool.
 package commands
 
 import (
@@ -7,9 +8,11 @@ import (
 	"github.com/pushbits/cli/internal/options"
 )
 
+// VersionCommand represents the options specific to the version command.
 type VersionCommand struct{}
 
-func (c *VersionCommand) Run(s *options.Options) error {
+// Run is the function for the version command.
+func (*VersionCommand) Run(_ *options.Options) error {
 	fmt.Printf("pbcli %s\n", buildconfig.Version)
 
 	return nil

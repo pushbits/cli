@@ -18,7 +18,7 @@ type createCommand struct {
 	StrictCompatibility bool   `long:"compat" help:"Enforce strict compatibility with Gotify"`
 }
 
-func (c *createCommand) Run(s *options.Options) error {
+func (c *createCommand) Run(_ *options.Options) error {
 	password := ui.GetCurrentPassword(c.Username)
 
 	data := map[string]interface{}{

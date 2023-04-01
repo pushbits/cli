@@ -1,3 +1,4 @@
+// Package application provides commands related to managing applications.
 package application
 
 // Command contains all subcommands provided by this package.

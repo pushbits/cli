@@ -1,3 +1,4 @@
+// Package ui provides utilities to interact with the user over the command line.
 package ui
 
 import (

@@ -1,7 +1,9 @@
+// Package api provides low-level functionality to interact with the PushBits API.
 package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -54,7 +56,7 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 	if hasBody {
 		reqBody, err := json.Marshal(data)
 		if err != nil {
-			log.Fatal(err)
+			return nil, err
 		}
 
 		reqBodyReader = strings.NewReader(string(reqBody))
@@ -62,7 +64,7 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 
 	req, err := http.NewRequest(method, url.String(), reqBodyReader)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	req.Header.Set("Accept", "application/json")
@@ -77,19 +79,19 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 	defer handling.Close(resp.Body)
 
 	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("Request failed with HTTP %s.", resp.Status)
+		return nil, fmt.Errorf("request failed with HTTP %s", resp.Status)
 	}
 
 	bodyText, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	var obj interface{}
 
 	err = json.Unmarshal(bodyText, &obj)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	return obj, nil
