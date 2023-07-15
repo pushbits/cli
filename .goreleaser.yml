@@ -6,19 +6,12 @@ builds:
     goos:
       - linux
       - windows
-      - freebsd
-      - openbsd
       - darwin
     goarch:
       - amd64
-      - 386
-      - arm
       - arm64
     env:
       - CGO_ENABLED=0
-    ignore:
-      - goos: freebsd
-        goarch: arm64
 
 checksum:
   algorithm: sha256
@@ -28,8 +21,6 @@ archives:
     builds:
       - pbcli
     format: tar.gz
-    replacements:
-        darwin: macOS
     format_overrides:
         - goos: windows
           format: zip
