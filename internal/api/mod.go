@@ -27,38 +27,29 @@ func buildURL(baseStr string, endpoint string) *url.URL {
 	return base.ResolveReference(u)
 }
 
-// Request sends a HTTP request to the server.
-func Request(base, endpoint, method, proxy, username, password string, hasBody bool, data interface{}) (interface{}, error) {
-	transport := http.DefaultTransport
-
-	if len(proxy) > 0 {
-		log.Printf("Using proxy '%s'", proxy)
-
-		proxyURL, err := url.Parse(proxy)
-		if err != nil {
-			return nil, err
-		}
-
-		transport = &http.Transport{
-			Proxy: http.ProxyURL(proxyURL),
-		}
+func createTransport(proxy string) (http.RoundTripper, error) {
+	if len(proxy) == 0 {
+		return http.DefaultTransport, nil
 	}
 
-	client := &http.Client{
-		Transport: transport,
+	log.Printf("Using proxy '%s'", proxy)
+	proxyURL, err := url.Parse(proxy)
+	if err != nil {
+		return nil, err
 	}
 
-	url := buildURL(base, endpoint)
+	return &http.Transport{
+		Proxy: http.ProxyURL(proxyURL),
+	}, nil
+}
 
+func createRequest(url *url.URL, method, username, password string, hasBody bool, data interface{}) (*http.Request, error) {
 	var reqBodyReader io.Reader
-	reqBodyReader = nil
-
 	if hasBody {
 		reqBody, err := json.Marshal(data)
 		if err != nil {
 			return nil, err
 		}
-
 		reqBodyReader = strings.NewReader(string(reqBody))
 	}
 
@@ -69,12 +60,14 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-
 	req.SetBasicAuth(username, password)
 
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
+	return req, nil
+}
+
+func handleResponse(resp *http.Response) (interface{}, error) {
+	if resp == nil {
+		return nil, fmt.Errorf("received nil response")
 	}
 	defer handling.Close(resp.Body)
 
@@ -88,13 +81,35 @@ func Request(base, endpoint, method, proxy, username, password string, hasBody b
 	}
 
 	var obj interface{}
-
 	err = json.Unmarshal(bodyText, &obj)
 	if err != nil {
 		return nil, err
 	}
 
 	return obj, nil
+}
+
+// Request sends a HTTP request to the server.
+func Request(base, endpoint, method, proxy, username, password string, hasBody bool, data interface{}) (interface{}, error) {
+	transport, err := createTransport(proxy)
+	if err != nil {
+		return nil, err
+	}
+
+	client := &http.Client{Transport: transport}
+	url := buildURL(base, endpoint)
+
+	req, err := createRequest(url, method, username, password, hasBody, data)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return handleResponse(resp)
 }
 
 // Delete sends a HTTP DELETE request to the server.
