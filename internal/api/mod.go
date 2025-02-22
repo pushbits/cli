@@ -9,8 +9,9 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/pushbits/cli/internal/handling"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/pushbits/cli/internal/handling"
 )
 
 func buildURL(baseStr string, endpoint string) *url.URL {
